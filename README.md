@@ -5,6 +5,7 @@
 ![GitHub watchers](https://img.shields.io/github/watchers/dylandasilva1999/babble-chat-app?color=%232f296a)
 ![GitHub language count](https://img.shields.io/github/languages/count/dylandasilva1999/babble-chat-app?color=%232f296a)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/dylandasilva1999/babble-chat-app?color=%232f296a)
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
 <h6 align="center">Dylan da Silva Android 302</h6>
 <p align="center">
@@ -17,7 +18,8 @@
   <h3 align="center">Babble</h3>
 
   <p align="center">
-    Bigger. Better. Babble
+    Bigger. Better. Babble <br>
+      <a href="https://github.com/dylandasilva1999/babble-chat-app"><strong>Explore the docs »</strong></a>
    <br />
    <br />
    <a href="">View Demo</a>
@@ -61,7 +63,11 @@
 
 ### Project Description
 
+According to Merriam Webster, the definition of Babble, is to "talk enthusiastically or excessively" (2021). Which relates to the theme of the project of creating a closed-group chat application. As per Wardle and Dotto, statistics state/show that 30% of Whatsapp users make use of private group chats "set up with workmates", meaning close-groups for chatting is used quite often (2020). Therefore having an application specifically built for companies that want private group communication is essential.
+
 Babble is closed-group chat application! Babble is built for those companies acquiring internal private communication, security, and chatting at ease.
+
+Babble is a project for a Term 2 module Android Development Expanded, where we were tasked to develop an Android closed-group chat application built with Kotlin for the application logic and Google Firebase to manage the authentication and backend. The theme of the project is based of Whatsapp that sparked a public outcry due to an update to their terms and privacy policy, and users are desperately searching for alternative platforms. Therefore as a developer, I saw this as a golden opportunity to build my own messaging platform, in this case, Babble.
 
 ### Built With
 
@@ -70,7 +76,7 @@ Babble is closed-group chat application! Babble is built for those companies acq
 * [Firebase](https://firebase.google.com/?gclid=Cj0KCQjwse-DBhC7ARIsAI8YcWItyGR2ha-LRzTOOglVa0RTNXSePdd7fMLvbCnR6ERBs4oI4ken-SYaAmsqEALw_wcB&gclsrc=aw.ds)
 * [GitHub](https://github.com/)
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Android_Studio_icon.svg" width="5%" height="5%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png" width="5%" height="5%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" width="5%" height="5%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Touchicon-180.png" width="5%" height="5%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Android_Studio_Icon_%282014-2019%29.svg" width="4%" height="4%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Kotlin_Icon.svg" width="4%" height="4%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" width="5%" height="5%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Touchicon-180.png" width="5%" height="5%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -202,13 +208,18 @@ Distributed under the MIT License. See `LICENSE` for more information.\
 <!-- LICENSE -->
 ## Contact
 
-* **Dylan da Silva** - 190082@virtualwindow.co.za
+* **Dylan da Silva** - [@dylandasilva.designs](https://www.instagram.com/dylandasilva.designs/) - 190082@virtualwindow.co.za
 * **Project Link** - https://github.com/dylandasilva1999/babble-chat-app
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
 * [My lecturer Armand Pretorius](https://github.com/ArmandPretorius)
+* [Whatsapp Statistics Article](https://firstdraftnews.org/long-form-article/closed-groups-messaging-apps-and-online-ads/)
+* [Babble Definition](https://www.merriam-webster.com/dictionary/babble)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [image1]: Images/Image1.png
+
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/dylan-da-silva-72b56a20a/
