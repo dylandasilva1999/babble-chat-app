@@ -111,9 +111,6 @@ Open `Android Studio` and select `File | Open...` from the menu. Select cloned d
 <!--![image2][image2]-->
 * Secure log in and sign up.
 * Babble on chat groups.
-
-<!--![image3][image3]-->
-
 * Babble and send text messages to other babblers.
 * Update your profile information.
 * Recieve push notifications when other babblers send messages.
