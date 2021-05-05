@@ -15,13 +15,13 @@ class MainActivity : AppCompatActivity() {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
 
         //Sign Up Button On Click to SignUpActivity
-        sign_up_btn.setOnClickListener {
+        w_sign_up_btn.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
 
         //Sign In Button On Click to SignInActivity
-        sign_in_btn.setOnClickListener {
+        w_sign_in_btn.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
         }
