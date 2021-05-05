@@ -14,8 +14,13 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <!-- No Action bar Theme -->
+    <!-- Splash Theme -->
     <style name="Theme.SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>

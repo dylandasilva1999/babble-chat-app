@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Babble">
         <activity
+            android:name=".SignInActivity"
+            android:theme="@style/Theme.NoActionBar"></activity>
+        <activity
+            android:name=".SignUpActivity"
+            android:theme="@style/Theme.NoActionBar" />
+        <activity
             android:name=".SplashActivity"
             android:theme="@style/Theme.SplashTheme">
             <intent-filter>
@@ -18,8 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.NoActionBar" />
     </application>
 
 </manifest>
