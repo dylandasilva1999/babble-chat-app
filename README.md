@@ -67,7 +67,7 @@ According to Merriam Webster, the definition of Babble, is to "talk enthusiastic
 
 Babble is a project for a Term 2 module Android Development Expanded, where we were tasked to develop an Android closed-group chat application built with Kotlin for the application logic and Google Firebase to manage the authentication and backend. The theme of the project is based of Whatsapp that sparked a public outcry due to an update to their terms and privacy policy, and users are desperately searching for alternative platforms. Therefore as a developer, I saw this as a golden opportunity to build my own messaging platform, in this case, Babble.
 
-Babble is closed-group chat application! Babble is built for those companies acquiring internal private communication, security, and chatting at ease.
+Babble is closed-group chat application! Babble is built for for those enthusiastic and excessive chatting conversations between fellow babblers.
 
 ### Built With
 
@@ -110,13 +110,13 @@ Open `Android Studio` and select `File | Open...` from the menu. Select cloned d
 
 <!--![image2][image2]-->
 * Secure log in and sign up.
-* View conversations in each group.
+* Babble on chat groups.
 
 <!--![image3][image3]-->
 
-* Send text messages to other users.
+* Babble and send text messages to other babblers.
 * Update your profile information.
-* Recieve push notifications when other users send messages.
+* Recieve push notifications when other babblers send messages.
 
 ### Functionality
 
