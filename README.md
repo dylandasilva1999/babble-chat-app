@@ -63,7 +63,7 @@
 
 ### Project Description
 
-According to Merriam Webster, the definition of Babble, is to "talk enthusiastically or excessively" (2021). Which relates to the theme of the project of creating a closed-group chat application. As per Wardle and Dotto, statistics state/show that 30% of Whatsapp users make use of private group chats "set up with workmates", meaning close-groups for chatting is used quite often (2020). Therefore having an application specifically built for companies that want private group communication is essential.
+According to Merriam Webster, the definition of Babble, is to "talk enthusiastically or excessively" (2021). Which relates to the theme of the project of creating a closed-group chat application. As per Wardle and Dotto, statistics state/show that 30% of Whatsapp users make use of private group chats "set up with workmates", meaning close-groups for chatting is used quite often (2020). Therefore having an application where users can do individual babbling and in groups at ease, is essential.
 
 Babble is a project for a Term 2 module Android Development Expanded, where we were tasked to develop an Android closed-group chat application built with Kotlin for the application logic and Google Firebase to manage the authentication and backend. The theme of the project is based of Whatsapp that sparked a public outcry due to an update to their terms and privacy policy, and users are desperately searching for alternative platforms. Therefore as a developer, I saw this as a golden opportunity to build my own messaging platform, in this case, Babble.
 
