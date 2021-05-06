@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Babble">
+        <activity android:name=".BaseActivity"></activity>
         <activity
             android:name=".SignInActivity"
-            android:theme="@style/Theme.NoActionBar"></activity>
+            android:theme="@style/Theme.NoActionBar" />
         <activity
             android:name=".SignUpActivity"
             android:theme="@style/Theme.NoActionBar" />
