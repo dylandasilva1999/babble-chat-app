@@ -30,7 +30,8 @@ class SignInActivity : BaseActivity() {
 
         sign_in_btn.setOnClickListener {
             signInUser()
-
+            et_email_si.setText("")
+            et_password_si.setText("")
         }
 
         mAuth = FirebaseAuth.getInstance()

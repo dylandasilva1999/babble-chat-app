@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignUpActivity : BaseActivity() {
@@ -32,7 +33,9 @@ class SignUpActivity : BaseActivity() {
 
         sign_up_btn.setOnClickListener {
             registerUser()
-
+            et_username_su.setText("")
+            et_email_su.setText("")
+            et_password_su.setText("")
         }
 
         mAuth = FirebaseAuth.getInstance()
