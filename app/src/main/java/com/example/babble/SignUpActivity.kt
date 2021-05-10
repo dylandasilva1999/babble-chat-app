@@ -41,7 +41,7 @@ class SignUpActivity : BaseActivity() {
 
         sign_up_btn.setOnClickListener {
             registerUser()
-            et_username_su.setText("")
+            et_fullname_su.setText("")
             et_email_su.setText("")
             et_password_su.setText("")
         }
@@ -50,7 +50,7 @@ class SignUpActivity : BaseActivity() {
     }
 
     private fun registerUser() {
-        val username: String = et_username_su.text.toString().trim{ it <= ' '}
+        val username: String = et_fullname_su.text.toString().trim{ it <= ' '}
         val email: String = et_email_su.text.toString().trim{ it <= ' '}
         val password: String = et_password_su.text.toString().trim{ it <= ' '}
 
