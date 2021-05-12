@@ -3,7 +3,9 @@ package com.example.babble
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
+import com.example.babble.utils.Constants
 import com.example.noted.BaseActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -50,13 +52,32 @@ class SignInActivity : BaseActivity() {
                 .addOnCompleteListener{task ->
                     if (task.isSuccessful) {
                         val firebaseUser: FirebaseUser = task.result!!.user!!
-                        val intent = Intent(this, ChatsActivity::class.java)
-                        startActivity(intent)
+                        sign_in_btn.visibility = View.INVISIBLE
+                        sign_in_animation.visibility = View.VISIBLE
+                        sign_in_animation.playAnimation()
+
+                        //Logging in user and navigate to ChatsActivity
+                        loginUserSuccess(firebaseUser.uid)
                     }
                     else {
+                        sign_in_btn.visibility = View.VISIBLE
                         showErrorSnackBar("Error Message: " + task.exception?.message.toString(), true)
                     }
                 }
         }
+    }
+
+    //Successfully logged in user function
+    fun loginUserSuccess(uid: String) {
+
+        //Navigation after Sign Up
+        val runnable = Runnable {
+            val intent = Intent(this, ChatsActivity::class.java)
+            intent.putExtra(Constants.LOGGED_IN_ID, uid)
+            startActivity(intent)
+            finish()
+        }
+
+        Handler().postDelayed(runnable, 2500)
     }
 }

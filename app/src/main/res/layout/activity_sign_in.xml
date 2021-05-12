@@ -105,9 +105,24 @@
         android:padding="15dp"
         android:paddingLeft="50dp"
         android:text="Sign In"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_password_si" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/sign_in_animation"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/sign_in_btn"
+        app:layout_constraintEnd_toEndOf="@+id/sign_in_btn"
+        app:layout_constraintStart_toStartOf="@+id/sign_in_btn"
+        app:layout_constraintTop_toTopOf="@+id/sign_in_btn"
+        app:lottie_autoPlay="false"
+        android:visibility="invisible"
+        app:lottie_rawRes="@raw/sign_in_screen_loading" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
