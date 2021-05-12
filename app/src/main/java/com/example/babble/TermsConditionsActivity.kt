@@ -19,6 +19,7 @@ class TermsConditionsActivity : AppCompatActivity() {
         wy_exit.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

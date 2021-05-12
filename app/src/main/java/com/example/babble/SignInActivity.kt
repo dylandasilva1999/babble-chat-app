@@ -50,7 +50,8 @@ class SignInActivity : BaseActivity() {
                 .addOnCompleteListener{task ->
                     if (task.isSuccessful) {
                         val firebaseUser: FirebaseUser = task.result!!.user!!
-                        showErrorSnackBar("Successfully logged in user id ${firebaseUser.uid}", false)
+                        val intent = Intent(this, ChatsActivity::class.java)
+                        startActivity(intent)
                     }
                     else {
                         showErrorSnackBar("Error Message: " + task.exception?.message.toString(), true)

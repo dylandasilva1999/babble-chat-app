@@ -10,8 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Babble">
         <activity
-            android:name=".TermsConditionsActivity"
+            android:name=".ChatsActivity"
             android:theme="@style/Theme.NoActionBar"></activity>
+        <activity
+            android:name=".TermsConditionsActivity"
+            android:theme="@style/Theme.NoActionBar" />
         <activity android:name=".BaseActivity" />
         <activity
             android:name=".SignInActivity"
