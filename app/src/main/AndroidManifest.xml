@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Babble">
+        <activity android:name=".ProfileActivity"></activity>
         <activity
             android:name=".ChatsActivity"
-            android:theme="@style/Theme.NoActionBar"></activity>
+            android:theme="@style/Theme.NoActionBar" />
         <activity
             android:name=".TermsConditionsActivity"
             android:theme="@style/Theme.NoActionBar" />

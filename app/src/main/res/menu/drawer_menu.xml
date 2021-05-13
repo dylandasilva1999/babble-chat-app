@@ -3,16 +3,4 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_profile"
-            android:title="Profile" />
-        <item
-            android:id="@+id/nav_chats"
-            android:title="Chats" />
-        <item
-            android:id="@+id/nav_users"
-            android:title="Users" />
-    </group>
-
 </menu>

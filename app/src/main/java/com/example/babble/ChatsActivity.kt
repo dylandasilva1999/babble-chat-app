@@ -1,5 +1,6 @@
 package com.example.babble
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
@@ -77,17 +78,18 @@ class ChatsActivity : AppCompatActivity() {
 
     val mOnNavigationItemSelectedListener = NavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.nav_profile -> {
+            R.id.profile_menu -> {
                 //Add Profile Intent Activity Here
                 drawer.closeDrawer(GravityCompat.START)
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.nav_chats-> {
-                //Add Chats Intent Activity Here
+            R.id.chats_menu-> {
+                val intent = Intent(this, ChatsActivity::class.java)
+                startActivity(intent)
                 drawer.closeDrawer(GravityCompat.START)
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.nav_users -> {
+            R.id.users_menu -> {
                 //Add Users Intent Activity Here
                 drawer.closeDrawer(GravityCompat.START)
                 return@OnNavigationItemSelectedListener true
