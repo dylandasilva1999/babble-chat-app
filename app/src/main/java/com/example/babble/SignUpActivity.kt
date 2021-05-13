@@ -100,7 +100,7 @@ class SignUpActivity : BaseActivity() {
 
         //Navigation after Sign Up
         val runnable = Runnable {
-            val intent = Intent(this, SignInActivity::class.java)
+            val intent = Intent(this, ProfileActivity::class.java)
             intent.putExtra(Constants.LOGGED_IN_ID, uid)
             startActivity(intent)
             finish()
