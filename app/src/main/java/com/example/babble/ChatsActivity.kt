@@ -44,6 +44,13 @@ class ChatsActivity : AppCompatActivity() {
             drawer.openDrawer(GravityCompat.START)
         }
 
+        var profileIcon = findViewById<ImageView>(R.id.profile_image)
+
+        profileIcon.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+
         //Reference the Chats and Search Fragments
         val chatsFragment = ChatsFragment()
         val searchFragment = SearchFragment()

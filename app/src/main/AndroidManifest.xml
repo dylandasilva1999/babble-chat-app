@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Babble">
-        <activity android:name=".ProfileActivity"></activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:theme="@style/Theme.NoActionBar"/>
         <activity
             android:name=".ChatsActivity"
             android:theme="@style/Theme.NoActionBar" />
