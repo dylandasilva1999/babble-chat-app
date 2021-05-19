@@ -59,7 +59,7 @@
 <!--PROJECT DESCRIPTION-->
 ## About the Project
 
-<!--![image1][image1]-->
+![image1][image1]
 
 ### Project Description
 
