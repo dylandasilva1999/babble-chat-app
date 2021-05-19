@@ -22,6 +22,9 @@ class Firestore {
                 //Do this on success, navigate to next activity
                 activity.registerUserSuccess(userInfo.id)
             }
+            .addOnFailureListener {
+                activity.showErrorSnackBar("Error while registering user...", true)
+            }
     }
 
 }

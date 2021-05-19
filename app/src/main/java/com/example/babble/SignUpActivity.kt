@@ -57,7 +57,7 @@ class SignUpActivity : BaseActivity() {
 
     //Register User Function
     private fun registerUser() {
-        val fullName: String = et_fullname_su.text.toString().trim{ it <= ' '}
+        val fullName: String = et_fullname_su.text.toString()
         val email: String = et_email_su.text.toString().trim{ it <= ' '}
         val password: String = et_password_su.text.toString().trim{ it <= ' '}
 

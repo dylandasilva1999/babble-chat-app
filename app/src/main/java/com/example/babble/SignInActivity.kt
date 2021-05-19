@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_sign_up.wy_back_btn
 class SignInActivity : BaseActivity() {
 
     private lateinit var mAuth: FirebaseAuth
+    private val RC_SIGN_IN = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +75,7 @@ class SignInActivity : BaseActivity() {
         val runnable = Runnable {
             val intent = Intent(this, ChatsActivity::class.java)
             intent.putExtra(Constants.LOGGED_IN_ID, uid)
-            startActivity(intent)
+            startActivityForResult(intent, RC_SIGN_IN)
             finish()
         }
 
