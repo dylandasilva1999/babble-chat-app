@@ -1,14 +1,15 @@
 package com.example.babble.utils
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.util.Log
 import com.example.babble.ChatsActivity
 import com.example.babble.SignUpActivity
+import com.example.babble.item.PersonItem
 import com.example.babble.model.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.*
+import com.xwray.groupie.kotlinandroidextensions.Item
 import java.lang.NullPointerException
 
 object Firestore {
@@ -16,6 +17,8 @@ object Firestore {
     //Initiate our Firestore
     @SuppressLint("StaticFieldLeak")
     private val db = FirebaseFirestore.getInstance()
+
+    private val firestoreInstance: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
 
     //Register user to Firestore database
     fun registerUser(activity: SignUpActivity, userInfo: User) {
@@ -34,7 +37,7 @@ object Firestore {
     }
 
     private val currentUserDocRef: DocumentReference
-    get() = db.document("user/${FirebaseAuth.getInstance().uid
+    get() = db.document("user/${FirebaseAuth.getInstance().currentUser?.uid
         ?: throw NullPointerException("UID is null and does not exist")}")
 
     fun initCurrentUserIfFirstTime(onComplete: () -> Unit) {
@@ -68,4 +71,23 @@ object Firestore {
             }
     }
 
+    fun addUsersListener(context: Context, onListen: (List<Item>) -> Unit): ListenerRegistration {
+        return firestoreInstance.collection("user")
+            .addSnapshotListener { snapshot: QuerySnapshot?, e: FirebaseFirestoreException? ->
+                if (e != null) {
+                    Log.e("FIRESTORE", "Users listener error.", e)
+                    return@addSnapshotListener
+                }
+                val items = mutableListOf<Item>()
+                snapshot?.documents?.forEach {
+                    if (it.id != FirebaseAuth.getInstance().currentUser?.uid) {
+                        items.add(PersonItem(it.toObject(User::class.java)!!, it.id, context))
+                    }
+                }
+                onListen(items)
+
+            }
+    }
+
+    fun removeListener(registration: ListenerRegistration) = registration.remove()
 }

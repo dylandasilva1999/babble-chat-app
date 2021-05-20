@@ -5,10 +5,62 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.babble.ChatsActivity
 import com.example.babble.R
+import com.example.babble.item.PersonItem
+import com.example.babble.model.User
+import com.example.babble.utils.Firestore
+import com.google.firebase.firestore.ListenerRegistration
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Section
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import com.xwray.groupie.kotlinandroidextensions.Item
+import kotlinx.android.synthetic.main.activity_chats.*
 import kotlinx.android.synthetic.main.activity_chats.view.*
+import kotlinx.android.synthetic.main.fragment_chats.*
 
-class ChatsFragment : Fragment(R.layout.fragment_chats) {
+class ChatsFragment : Fragment() {
 
+    private lateinit var userListenerRegistration: ListenerRegistration
+
+    private var shouldInitRecyclerView = true
+
+    private lateinit var chatsSection: Section
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
+
+        userListenerRegistration = Firestore.addUsersListener(this.activity!!, this::updateRecyclerView)
+
+        return inflater.inflate(R.layout.fragment_chats, container, false)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Firestore.removeListener(userListenerRegistration)
+        shouldInitRecyclerView = true
+    }
+
+    private fun updateRecyclerView(items: List<Item>) {
+
+        fun init() {
+            recycler_view_chats.apply {
+                layoutManager = LinearLayoutManager(this@ChatsFragment.context)
+                adapter = GroupAdapter<GroupieViewHolder>().apply {
+                    chatsSection = Section(items)
+                    add(chatsSection)
+                }
+            }
+            shouldInitRecyclerView = false
+        }
+
+        fun updateItems()  = chatsSection.update(items)
+
+        if (shouldInitRecyclerView)
+            init()
+        else
+            updateItems()
+    }
 }

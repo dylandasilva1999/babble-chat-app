@@ -1,16 +1,16 @@
 package com.example.babble
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.babble.fragments.ChatsFragment
+import com.example.babble.fragments.ProfileFragment
 import com.example.babble.fragments.SearchFragment
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_chats.*
@@ -24,6 +24,17 @@ class ChatsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chats)
 
+        //Reference the Chats and Search Fragments
+        val chatsFragment = ChatsFragment()
+        val searchFragment = SearchFragment()
+
+        //Set the default fragment view to ChatsFragment
+        supportFragmentManager.beginTransaction().apply {
+            tv_chats.setBackgroundResource(R.drawable.rounded_corners)
+            replace(R.id.fl_fragment, chatsFragment)
+            commit()
+        }
+
         //Make the View FullScreen
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
 
@@ -36,7 +47,12 @@ class ChatsActivity : AppCompatActivity() {
         var menu_icon = findViewById<ImageView>(R.id.burger_menu)
 
         //Toggle for navigation drawer open and close
-        var toggle: ActionBarDrawerToggle = ActionBarDrawerToggle(this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        var toggle: ActionBarDrawerToggle = ActionBarDrawerToggle(
+            this,
+            drawer,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
         drawer.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -48,19 +64,8 @@ class ChatsActivity : AppCompatActivity() {
         var profileIcon = findViewById<ImageView>(R.id.profile_image)
 
         profileIcon.setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
+            val intent = Intent (this, ProfileActivity::class.java)
             startActivity(intent)
-        }
-
-        //Reference the Chats and Search Fragments
-        val chatsFragment = ChatsFragment()
-        val searchFragment = SearchFragment()
-
-        //Set the default fragment view to ChatsFragment
-        supportFragmentManager.beginTransaction().apply {
-            tv_chats.setBackgroundResource(R.drawable.rounded_corners)
-            replace(R.id.fl_fragment, chatsFragment)
-            commit()
         }
 
         tv_chats.setOnClickListener {
@@ -84,6 +89,12 @@ class ChatsActivity : AppCompatActivity() {
         }
     }
 
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fl_fragment, fragment)
+            .commit()
+    }
+
     val mOnNavigationItemSelectedListener = NavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.profile_menu -> {
@@ -91,7 +102,7 @@ class ChatsActivity : AppCompatActivity() {
                 drawer.closeDrawer(GravityCompat.START)
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.chats_menu-> {
+            R.id.chats_menu -> {
                 val intent = Intent(this, ChatsActivity::class.java)
                 startActivity(intent)
                 drawer.closeDrawer(GravityCompat.START)
