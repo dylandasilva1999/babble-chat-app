@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Layout
+import android.util.Log
 import android.view.Gravity.apply
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,7 @@ import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_profile.*
 import org.jetbrains.anko.*
+import org.jetbrains.anko.appcompat.v7.alertDialogLayout
 import java.io.ByteArrayOutputStream
 
 class ProfileActivity : AppCompatActivity() {
@@ -80,12 +82,12 @@ class ProfileActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SELECT_IMAGE && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             var selectedImagePath = data.data
+            val activity = ProfileActivity()
             var selectedImageBmp = MediaStore.Images.Media
-                .getBitmap(this.contentResolver, selectedImagePath)
+                .getBitmap(activity?.contentResolver, selectedImagePath)
             val outputStream = ByteArrayOutputStream()
             selectedImageBmp.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
             selectedImageBytes = outputStream.toByteArray()
-            profile_image.setImageBitmap(selectedImageBmp)
 
             GlideApp.with(this)
                 .load(selectedImageBytes)
@@ -99,16 +101,24 @@ class ProfileActivity : AppCompatActivity() {
         super.onStart()
         var activity = ProfileActivity()
         Firestore.getCurrentUser { user ->
-            if (activity.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
+            if (view.toggleVisibility()) {
                 editText_fullname.setText(user.fullName)
                 editText_email.setText(user.email)
-                if (!profileJustChanged && user.profileImagePath != null) {
+                if (!profileJustChanged && user.profileImagePath != "") {
                     GlideApp.with(this)
                         .load(StorageUtil.pathToReference(user.profileImagePath))
                         .placeholder(R.drawable.default_profile_screen)
                         .into(profile_image)
                 }
             }
+        }
+    }
+
+    fun View.toggleVisibility() {
+        if (visibility == View.VISIBLE) {
+            visibility = View.INVISIBLE
+        } else {
+            visibility = View.VISIBLE
         }
     }
 }
