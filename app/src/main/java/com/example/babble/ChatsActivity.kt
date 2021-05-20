@@ -9,6 +9,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import com.example.babble.fragments.ChatsFragment
 import com.example.babble.fragments.SearchFragment
 import com.google.android.material.navigation.NavigationView

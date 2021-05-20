@@ -74,10 +74,10 @@ class SignUpActivity : BaseActivity() {
                         val firebaseUser: FirebaseUser = task.result!!.user!!
 
                         //Creating the user data
-                        val user = User(
+                        val users = User(
                             firebaseUser.uid,
-                            fullName,
-                            email
+                            email,
+                            fullName
                         )
 
                         sign_up_btn.visibility = View.INVISIBLE
@@ -85,7 +85,7 @@ class SignUpActivity : BaseActivity() {
                         sign_up_animation.playAnimation()
 
                         //Adding user data to Firestore
-                        Firestore().registerUser(this, user)
+                        Firestore.registerUser(this, users)
                     }
                     else {
                         sign_up_btn.visibility = View.VISIBLE

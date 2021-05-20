@@ -1,14 +1,20 @@
 package com.example.babble.utils
 
+import android.annotation.SuppressLint
 import com.example.babble.ChatsActivity
 import com.example.babble.SignUpActivity
 import com.example.babble.model.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import java.lang.NullPointerException
 
-class Firestore {
+object Firestore {
 
     //Initiate our Firestore
+    @SuppressLint("StaticFieldLeak")
     private val db = FirebaseFirestore.getInstance()
 
     //Register user to Firestore database
@@ -24,6 +30,41 @@ class Firestore {
             }
             .addOnFailureListener {
                 activity.showErrorSnackBar("Error while registering user...", true)
+            }
+    }
+
+    private val currentUserDocRef: DocumentReference
+    get() = db.document("user/${FirebaseAuth.getInstance().uid
+        ?: throw NullPointerException("UID is null and does not exist")}")
+
+    fun initCurrentUserIfFirstTime(onComplete: () -> Unit) {
+        currentUserDocRef.get().addOnSuccessListener { DocumentSnapshot ->
+            if (!DocumentSnapshot.exists()) {
+                val newUser = User(FirebaseAuth.getInstance().currentUser?.displayName ?:
+                "", "", "", "")
+                currentUserDocRef.set(newUser).addOnSuccessListener {
+                    onComplete()
+                }
+            }else {
+                onComplete()
+            }
+        }
+    }
+
+    fun updateCurrentUser(email: String = "", fullName: String = "", profilePicturePath: String = "") {
+        val userFieldMap = mutableMapOf<String, Any>()
+        if (email.isNotBlank()) userFieldMap["email"] = email
+        if (fullName.isNotBlank()) userFieldMap["fullName"] = fullName
+        if (profilePicturePath != "") {
+            userFieldMap["profilePicturePath"] = profilePicturePath
+        }
+        currentUserDocRef.update(userFieldMap)
+    }
+
+    fun getCurrentUser(onComplete: (User) -> Unit) {
+        currentUserDocRef.get()
+            .addOnSuccessListener {
+                onComplete(it.toObject(User::class.java)!!)
             }
     }
 

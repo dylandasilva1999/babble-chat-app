@@ -1,17 +1,26 @@
 package com.example.babble
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import com.example.babble.utils.Constants
+import com.example.babble.utils.Firestore
 import com.example.noted.BaseActivity
+import com.firebase.ui.auth.ErrorCodes
+import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_sign_up.wy_back_btn
+import org.jetbrains.anko.clearTask
+import org.jetbrains.anko.design.longSnackbar
+import org.jetbrains.anko.indeterminateProgressDialog
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.newTask
 
 class SignInActivity : BaseActivity() {
 
@@ -38,6 +47,29 @@ class SignInActivity : BaseActivity() {
         }
 
         mAuth = FirebaseAuth.getInstance()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == RC_SIGN_IN) {
+            val response = IdpResponse.fromResultIntent(data)
+
+            if (resultCode == Activity.RESULT_OK) {
+                Firestore.initCurrentUserIfFirstTime {
+                    startActivity(intentFor<ChatsActivity>().newTask().clearTask())
+                }
+            }
+            else if (resultCode == Activity.RESULT_CANCELED) {
+                if (response == null) return
+                when (response.error?.errorCode) {
+                    ErrorCodes.NO_NETWORK ->
+                        showErrorSnackBar("No Network", true)
+                    ErrorCodes.UNKNOWN_ERROR ->
+                        showErrorSnackBar("Unknown Error", true)
+                }
+            }
+        }
     }
 
     private fun signInUser() {
