@@ -18,18 +18,18 @@ class PersonItem(
     private val context: Context)
     : Item(){
 
-    override fun getLayout() = R.layout.item_person
-
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 
         viewHolder.itemView.apply {
             textView_name.text = person.fullName
             textView_email.text = person.email
-            if (person.profileImagePath != "")
+            if (person.profileImagePath != null)
                 GlideApp.with(context)
                     .load(StorageUtil.pathToReference(person.profileImagePath))
                     .placeholder(R.drawable.user_profile)
                     .into(viewHolder.profile_image_user)
         }
     }
+
+    override fun getLayout() = R.layout.item_person
 }

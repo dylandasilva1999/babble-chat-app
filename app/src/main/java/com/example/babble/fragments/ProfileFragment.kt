@@ -35,15 +35,9 @@ class ProfileFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_chats, container, false)
+        val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
         view.apply {
-
-            //wp_back_btn.setOnClickListener {
-                //val intent = Intent(this, ChatsActivity::class.java)
-                //startActivity(intent)
-            //}
-
             profile_image.setOnClickListener {
                 val intent = Intent().apply {
                     type = "image/*"
@@ -61,7 +55,7 @@ class ProfileFragment : Fragment() {
                     }
                 } else {
                     Firestore.updateCurrentUser(editText_email.text.toString(),
-                        editText_fullname.text.toString(),  "")
+                        editText_fullname.text.toString(),  null)
                 }
             }
 
@@ -100,7 +94,7 @@ class ProfileFragment : Fragment() {
             if (this@ProfileFragment.isVisible) {
                 editText_fullname.setText(user.fullName)
                 editText_email.setText(user.email)
-                if (!profileJustChanged && user.profileImagePath != "") {
+                if (!profileJustChanged && user.profileImagePath != null) {
                     GlideApp.with(this)
                         .load(StorageUtil.pathToReference(user.profileImagePath))
                         .placeholder(R.drawable.default_profile_screen)

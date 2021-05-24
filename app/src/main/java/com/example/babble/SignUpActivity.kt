@@ -78,7 +78,8 @@ class SignUpActivity : BaseActivity() {
                         val users = User(
                             firebaseUser.uid,
                             email,
-                            fullName
+                            fullName,
+                            null
                         )
 
                         sign_up_btn.visibility = View.INVISIBLE

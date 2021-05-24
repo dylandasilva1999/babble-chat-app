@@ -101,9 +101,9 @@ class SignInActivity : BaseActivity() {
     }
 
     //Successfully logged in user function
-    fun loginUserSuccess(uid: String) {
+    private fun loginUserSuccess(uid: String) {
 
-        //Navigation after Sign Up
+        //Navigation after Sign In
         val runnable = Runnable {
             val intent = Intent(this, ChatsActivity::class.java)
             intent.putExtra(Constants.LOGGED_IN_ID, uid)

@@ -8,7 +8,9 @@ import com.example.babble.SignUpActivity
 import com.example.babble.item.PersonItem
 import com.example.babble.model.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.*
+import com.google.firebase.ktx.Firebase
 import com.xwray.groupie.kotlinandroidextensions.Item
 import java.lang.NullPointerException
 
@@ -37,14 +39,14 @@ object Firestore {
     }
 
     private val currentUserDocRef: DocumentReference
-    get() = db.document("user/${FirebaseAuth.getInstance().currentUser?.uid
-        ?: throw NullPointerException("UID is null and does not exist")}")
+        get() = firestoreInstance.document("user/${FirebaseAuth.getInstance().currentUser?.uid
+            ?: throw NullPointerException("UID is null")}")
 
     fun initCurrentUserIfFirstTime(onComplete: () -> Unit) {
         currentUserDocRef.get().addOnSuccessListener { DocumentSnapshot ->
             if (!DocumentSnapshot.exists()) {
                 val newUser = User(FirebaseAuth.getInstance().currentUser?.displayName ?:
-                "", "", "", "")
+                "", "", "", null)
                 currentUserDocRef.set(newUser).addOnSuccessListener {
                     onComplete()
                 }
@@ -54,12 +56,12 @@ object Firestore {
         }
     }
 
-    fun updateCurrentUser(email: String = "", fullName: String = "", profilePicturePath: String = "") {
+    fun updateCurrentUser(email: String = "", fullName: String = "", profilePicturePath: String? = null) {
         val userFieldMap = mutableMapOf<String, Any>()
         if (email.isNotBlank()) userFieldMap["email"] = email
         if (fullName.isNotBlank()) userFieldMap["fullName"] = fullName
-        if (profilePicturePath != "") {
-            userFieldMap["profilePicturePath"] = profilePicturePath
+        if (profilePicturePath != null) {
+            userFieldMap["profileImagePath"] = profilePicturePath
         }
         currentUserDocRef.update(userFieldMap)
     }
@@ -85,7 +87,6 @@ object Firestore {
                     }
                 }
                 onListen(items)
-
             }
     }
 

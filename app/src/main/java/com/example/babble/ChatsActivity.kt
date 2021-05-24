@@ -12,13 +12,23 @@ import androidx.fragment.app.Fragment
 import com.example.babble.fragments.ChatsFragment
 import com.example.babble.fragments.ProfileFragment
 import com.example.babble.fragments.SearchFragment
+import com.example.babble.glide.GlideApp
+import com.example.babble.utils.Constants
+import com.example.babble.utils.Firestore
+import com.example.babble.utils.StorageUtil
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_chats.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.nav_header.*
 
 class ChatsActivity : AppCompatActivity() {
 
     private lateinit var drawer: DrawerLayout
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +41,7 @@ class ChatsActivity : AppCompatActivity() {
         //Set the default fragment view to ChatsFragment
         supportFragmentManager.beginTransaction().apply {
             tv_chats.setBackgroundResource(R.drawable.rounded_corners)
-            replace(R.id.fl_fragment, chatsFragment)
+            replaceFragment(ChatsFragment())
             commit()
         }
 
