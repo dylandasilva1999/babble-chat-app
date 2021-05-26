@@ -82,7 +82,8 @@ class ChatsFragment : Fragment() {
         if (item is PersonItem) {
             startActivity<ChattingActivity>(
                 Constants.USER_NAME to item.person.fullName,
-                Constants.USER_ID to item.userId
+                Constants.USER_ID to item.userId,
+                Constants.USER_PROFILE to item.person.profileImagePath
             )
         }
     }

@@ -12,4 +12,7 @@ object Constants {
 
     //User name
     const val USER_NAME = "USER_NAME"
+
+    //User profile
+    const val USER_PROFILE = "USER_PROFILE"
 }

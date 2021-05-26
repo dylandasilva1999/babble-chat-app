@@ -7,10 +7,7 @@ import com.example.babble.ChatsActivity
 import com.example.babble.SignUpActivity
 import com.example.babble.item.PersonItem
 import com.example.babble.item.TextMessageItem
-import com.example.babble.model.ChatChannel
-import com.example.babble.model.MessageType
-import com.example.babble.model.TextMessage
-import com.example.babble.model.User
+import com.example.babble.model.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.*
@@ -127,7 +124,7 @@ object Firestore {
     }
 
     fun addChatMessageListener(channelId: String, context: Context, onListen: (List<Item>) -> Unit): ListenerRegistration {
-        return chatChannelsCollectionRef.document(channelId).collection("message")
+        return chatChannelsCollectionRef.document(channelId).collection("messages")
             .orderBy("time")
             .addSnapshotListener { snapshot: QuerySnapshot?, e: FirebaseFirestoreException? ->
                 if (e != null) {
@@ -141,7 +138,14 @@ object Firestore {
                     } else {
                         TODO("Add Image message")
                     }
+                    onListen(items)
                 }
             }
+    }
+
+    fun sendMessage(message: Message, channelId: String) {
+        chatChannelsCollectionRef.document(channelId)
+            .collection("messages")
+            .add(message)
     }
 }
