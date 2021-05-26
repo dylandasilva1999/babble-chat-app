@@ -10,8 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Babble">
         <activity
+            android:name=".ChattingActivity"
+            android:theme="@style/Theme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ChatsActivity"/>
+        </activity>
+        <activity
             android:name=".ProfileActivity"
-            android:theme="@style/Theme.NoActionBar"/>
+            android:theme="@style/Theme.NoActionBar" />
         <activity
             android:name=".ChatsActivity"
             android:theme="@style/Theme.NoActionBar" />
