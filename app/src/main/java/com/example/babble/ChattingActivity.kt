@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.babble.model.MessageType
 import com.example.babble.model.TextMessage
+import com.example.babble.model.User
 import com.example.babble.utils.Constants
 import com.example.babble.utils.Firestore
 import com.google.firebase.auth.FirebaseAuth
@@ -28,11 +29,19 @@ class ChattingActivity : AppCompatActivity() {
     private var shouldInitRecyclerView = true
     private lateinit var messagesSection: Section
 
+    private lateinit var currentChannelId: String
+    private lateinit var currentUser: User
+    private lateinit var otherUserId: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatting)
 
         chatting_user_name.text = intent.getStringExtra(Constants.USER_NAME)
+
+        Firestore.getCurrentUser {
+            currentUser = it
+        }
 
         wp_back_btn.setOnClickListener {
             val intent = Intent(this, ChatsActivity::class.java)
@@ -42,10 +51,11 @@ class ChattingActivity : AppCompatActivity() {
         val otherUserId = intent.getStringExtra(Constants.USER_ID)
         if (otherUserId != null) {
             Firestore.getOnCreateChatChannel(otherUserId) { channelId ->
+                currentChannelId = channelId
                 messageListenerRegistration = Firestore.addChatMessageListener(channelId, this, this::updateRecyclerView)
                 imageView_send.setOnClickListener {
                     val messageToSend = TextMessage(editText_message.text.toString(), Calendar.getInstance().time,
-                    FirebaseAuth.getInstance().currentUser!!.uid, MessageType.TEXT)
+                    FirebaseAuth.getInstance().currentUser!!.uid, otherUserId, currentUser.fullName)
                     editText_message.setText("")
                     Firestore.sendMessage(messageToSend, channelId)
                 }

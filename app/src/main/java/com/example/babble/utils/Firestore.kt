@@ -136,7 +136,6 @@ object Firestore {
                     if (it["type"] == MessageType.TEXT) {
                         items.add(TextMessageItem(it.toObject(TextMessage::class.java)!!, context))
                     } else {
-                        TODO("Add Image message")
                     }
                     onListen(items)
                 }
