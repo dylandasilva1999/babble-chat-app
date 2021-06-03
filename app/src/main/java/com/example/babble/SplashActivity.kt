@@ -19,8 +19,6 @@ class SplashActivity : AppCompatActivity() {
 
         if (FirebaseAuth.getInstance().currentUser == null) {
             Log.d("User is null", "User is being sent to sign in")
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
         } else {
             Log.d("User is found", "Launching ChatsActivity")
             val intent = Intent(this, ChatsActivity::class.java)
