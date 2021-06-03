@@ -3,15 +3,15 @@ package com.example.babble.fragments
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import com.example.babble.ChatsActivity
+import androidx.fragment.app.Fragment
 import com.example.babble.R
 import com.example.babble.SignInActivity
 import com.example.babble.glide.GlideApp
@@ -22,7 +22,6 @@ import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import org.jetbrains.anko.clearTask
-import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.newTask
 import org.jetbrains.anko.support.v4.intentFor
 import java.io.ByteArrayOutputStream
@@ -33,18 +32,39 @@ class ProfileFragment : Fragment() {
     private lateinit var selectedImageBytes: ByteArray
     private var profileJustChanged = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
         view.apply {
+            iv_instagram.setOnClickListener {
+                val openURL = Intent(android.content.Intent.ACTION_VIEW)
+                openURL.data = Uri.parse("https://www.instagram.com/")
+                startActivity(openURL)
+            }
+
+            iv_facebook.setOnClickListener {
+                val openURL = Intent(android.content.Intent.ACTION_VIEW)
+                openURL.data = Uri.parse("https://www.facebook.com/")
+                startActivity(openURL)
+            }
+
+            iv_twitter.setOnClickListener {
+                val openURL = Intent(android.content.Intent.ACTION_VIEW)
+                openURL.data = Uri.parse("https://www.twitter.com/")
+                startActivity(openURL)
+            }
+
             profile_image.setOnClickListener {
                 val intent = Intent().apply {
                     type = "image/*"
                     action = Intent.ACTION_GET_CONTENT
                     putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/jpeg", "image/png"))
                 }
-                startActivityForResult(Intent.createChooser(intent, "Select Image"), RC_SELECT_IMAGE)
+                startActivityForResult(Intent.createChooser(intent, "Select Image"),
+                    RC_SELECT_IMAGE)
             }
 
             save_info_btn.setOnClickListener {
@@ -55,7 +75,7 @@ class ProfileFragment : Fragment() {
                     }
                 } else {
                     Firestore.updateCurrentUser(editText_email.text.toString(),
-                        editText_fullname.text.toString(),  null)
+                        editText_fullname.text.toString(), null)
                 }
             }
 

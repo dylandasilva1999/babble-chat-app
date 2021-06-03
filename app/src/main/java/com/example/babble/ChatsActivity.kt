@@ -108,18 +108,14 @@ class ChatsActivity : AppCompatActivity() {
     val mOnNavigationItemSelectedListener = NavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.profile_menu -> {
-                //Add Profile Intent Activity Here
-                drawer.closeDrawer(GravityCompat.START)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.chats_menu -> {
-                val intent = Intent(this, ChatsActivity::class.java)
+                val intent = Intent(this, ProfileActivity::class.java)
                 startActivity(intent)
                 drawer.closeDrawer(GravityCompat.START)
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.users_menu -> {
-                //Add Users Intent Activity Here
+            R.id.profile_layout -> {
+                val intent = Intent(this, ChatsActivity::class.java)
+                startActivity(intent)
                 drawer.closeDrawer(GravityCompat.START)
                 return@OnNavigationItemSelectedListener true
             }

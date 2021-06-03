@@ -50,6 +50,7 @@
         android:fontFamily="@font/source_sans_pro_regular"
         android:text="Profile"
         android:textSize="22sp"
+        android:clickable="true"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/textView" />
 
@@ -61,21 +62,10 @@
         android:layout_marginTop="40dp"
         android:fontFamily="@font/source_sans_pro_regular"
         android:text="Chats"
+        android:clickable="true"
         android:textSize="22sp"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/profile_menu" />
-
-    <TextView
-        android:id="@+id/users_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/source_sans_pro_regular"
-        android:text="Users"
-        android:textSize="22sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/chats_menu" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -86,15 +76,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:srcCompat="@drawable/chats_menu_icon" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="43dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:srcCompat="@drawable/users_menu_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

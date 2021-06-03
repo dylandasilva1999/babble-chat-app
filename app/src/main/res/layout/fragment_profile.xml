@@ -46,29 +46,35 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView8"
+                    android:id="@+id/iv_instagram"
                     android:layout_width="wrap_content"
+                    android:tag="https://www.instagram.com/"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    android:clickable="true"
                     app:srcCompat="@drawable/instagram_icon" />
 
                 <ImageView
-                    android:id="@+id/imageView9"
+                    android:id="@+id/iv_facebook"
                     android:layout_width="wrap_content"
+                    android:tag="https://www.facebook.com/"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView10"
-                    app:layout_constraintStart_toEndOf="@+id/imageView8"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_twitter"
+                    app:layout_constraintStart_toEndOf="@+id/iv_instagram"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/facebook_icon" />
 
                 <ImageView
-                    android:id="@+id/imageView10"
+                    android:id="@+id/iv_twitter"
                     android:layout_width="wrap_content"
+                    android:tag="https://www.twitter.com/"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
                     android:layout_marginEnd="40dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
