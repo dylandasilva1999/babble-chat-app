@@ -1,24 +1,26 @@
 package com.example.babble
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.View
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.babble.glide.GlideApp.init
-import com.example.babble.model.ImageMessage
-import com.example.babble.model.MessageType
-import com.example.babble.model.TextMessage
-import com.example.babble.model.User
+import com.example.babble.model.*
+import com.example.babble.service.MyFirebaseMessagingService
+import com.example.babble.service.RetrofitInstance
 import com.example.babble.utils.Constants
 import com.example.babble.utils.Firestore
 import com.example.babble.utils.StorageUtil
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.gson.Gson
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
@@ -26,7 +28,9 @@ import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.activity_chatting.*
 import kotlinx.android.synthetic.main.activity_chatting.wp_back_btn
 import kotlinx.android.synthetic.main.activity_profile.*
-import org.jetbrains.anko.toast
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -38,15 +42,26 @@ class ChattingActivity : AppCompatActivity() {
     private var shouldInitRecyclerView = true
     private lateinit var messagesSection: Section
 
+    var firebaseUser: FirebaseUser? = null
+
     private lateinit var currentChannelId: String
     private lateinit var currentUser: User
     private lateinit var otherUserId: String
+
+    var topic = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatting)
 
         chatting_user_name.text = intent.getStringExtra(Constants.USER_NAME)
+
+        val userName = intent.getStringExtra(Constants.USER_NAME)
+
+        MyFirebaseMessagingService.sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
+            MyFirebaseMessagingService.token = it.token
+        }
 
         Firestore.getCurrentUser {
             currentUser = it
@@ -60,6 +75,7 @@ class ChattingActivity : AppCompatActivity() {
         otherUserId = intent.getStringExtra(Constants.USER_ID).toString()
 
             Firestore.getOnCreateChatChannel(otherUserId!!) { channelId ->
+
                 currentChannelId = channelId
                 messageListenerRegistration = Firestore.addChatMessageListener(channelId, this, this::updateRecyclerView)
 
@@ -68,9 +84,16 @@ class ChattingActivity : AppCompatActivity() {
                     FirebaseAuth.getInstance().currentUser!!.uid, otherUserId, currentUser.fullName)
                     editText_message.setText("")
                     Firestore.sendMessage(messageToSend, channelId)
+                    topic = "topics/$otherUserId"
+                    FirebaseMessaging.getInstance().subscribeToTopic("/topics/$otherUserId")
+                    PushNotification(NotificationData(userName!!, messageToSend),
+                        topic).also {
+                        sendNotification(it)
+                    }
                 }
 
                 fab_send_image.setOnClickListener {
+                    FirebaseMessaging.getInstance().subscribeToTopic("/topics/$otherUserId")
                     val intent = Intent().apply {
                         type = "image/*"
                         action = Intent.ACTION_GET_CONTENT
@@ -79,6 +102,19 @@ class ChattingActivity : AppCompatActivity() {
                     startActivityForResult(Intent.createChooser(intent, "Select Image"), RC_SELECT_IMAGE)
                 }
             }
+    }
+
+    private fun sendNotification(notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
+        try {
+            val response = RetrofitInstance.api.postNotification(notification)
+            if(response.isSuccessful) {
+                Log.d("TAG", "Response: ${Gson().toJson(response)}")
+            } else {
+                Log.e("TAG", response.errorBody()!!.string())
+            }
+        } catch(e: Exception) {
+            Log.e("TAG", e.toString())
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

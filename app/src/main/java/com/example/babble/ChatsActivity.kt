@@ -1,5 +1,6 @@
 package com.example.babble
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -13,13 +14,18 @@ import com.example.babble.fragments.ChatsFragment
 import com.example.babble.fragments.ProfileFragment
 import com.example.babble.fragments.SearchFragment
 import com.example.babble.glide.GlideApp
+import com.example.babble.service.MyFirebaseMessagingService
+import com.example.babble.service.MyFirebaseMessagingService.Companion.sharedPref
 import com.example.babble.utils.Constants
 import com.example.babble.utils.Firestore
 import com.example.babble.utils.StorageUtil
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.FirebaseMessagingService
 import kotlinx.android.synthetic.main.activity_chats.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.nav_header.*
