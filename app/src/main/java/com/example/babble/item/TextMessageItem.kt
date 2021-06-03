@@ -15,33 +15,10 @@ import java.text.SimpleDateFormat
 
 class TextMessageItem(val message: TextMessage,
                       val context: Context)
-    : Item(){
+    : MessageItem(message){
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.textView_message_text.text = message.text
-        setTimeText(viewHolder)
-        setMessageRootGravity(viewHolder)
-    }
-
-    private fun setTimeText(viewHolder: GroupieViewHolder) {
-        val dateFormat = SimpleDateFormat
-            .getDateTimeInstance(SimpleDateFormat.SHORT, SimpleDateFormat.SHORT)
-        viewHolder.textView_message_time.text = dateFormat.format(message.time)
-    }
-
-    private fun setMessageRootGravity(viewHolder: GroupieViewHolder) {
-        if (message.senderId == FirebaseAuth.getInstance().currentUser?.uid) {
-            viewHolder.message_root.apply {
-                backgroundResource = R.drawable.rounded_corners_yellow
-                val lParams = FrameLayout.LayoutParams(wrapContent, wrapContent, Gravity.END)
-                this.layoutParams = lParams
-            }
-        } else {
-            viewHolder.message_root.apply {
-                backgroundResource = R.drawable.rounded_corners_purple
-                val lParams = FrameLayout.LayoutParams(wrapContent, wrapContent, Gravity.START)
-                this.layoutParams = lParams
-            }
-        }
+        super.bind(viewHolder, position)
     }
 
     override fun getLayout() = R.layout.item_text_message

@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import com.example.babble.ChatsActivity
 import com.example.babble.SignUpActivity
+import com.example.babble.item.ImageMessageItem
 import com.example.babble.item.PersonItem
 import com.example.babble.item.TextMessageItem
 import com.example.babble.model.*
@@ -136,6 +137,7 @@ object Firestore {
                     if (it["type"] == MessageType.TEXT) {
                         items.add(TextMessageItem(it.toObject(TextMessage::class.java)!!, context))
                     } else {
+                        items.add(ImageMessageItem(it.toObject(ImageMessage::class.java)!!, context))
                     }
                     onListen(items)
                 }
