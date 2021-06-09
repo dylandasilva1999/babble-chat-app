@@ -104,7 +104,7 @@
             android:paddingTop="10dp"
             android:paddingRight="45dp"
             android:paddingBottom="10dp"
-            android:text="Search"
+            android:text="Groups"
             android:textColor="@color/white"
             android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"

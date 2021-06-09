@@ -17,7 +17,6 @@ import androidx.core.app.NotificationCompat
 import com.example.babble.ChatsActivity
 import com.example.babble.ChattingActivity
 import com.example.babble.R
-import com.example.babble.fragments.ChatsFragment
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import kotlin.random.Random
@@ -46,7 +45,7 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
     override fun onMessageReceived(p0: RemoteMessage) {
         super.onMessageReceived(p0)
 
-        val intent = Intent(this, ChatsFragment::class.java)
+        val intent = Intent(this, ChatsActivity::class.java)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notificationId = Random.nextInt()
 

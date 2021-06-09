@@ -10,9 +10,11 @@ import com.example.babble.item.PersonItem
 import com.example.babble.item.TextMessageItem
 import com.example.babble.model.*
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.*
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.xwray.groupie.kotlinandroidextensions.Item
 import java.lang.NullPointerException
 
@@ -78,6 +80,12 @@ object Firestore {
     }
 
     fun addUsersListener(context: Context, onListen: (List<Item>) -> Unit): ListenerRegistration {
+
+        val firebase: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
+
+        var userid = firebase.uid
+        FirebaseMessaging.getInstance().subscribeToTopic("/topics/$userid")
+
         return firestoreInstance.collection("user")
             .addSnapshotListener { snapshot: QuerySnapshot?, e: FirebaseFirestoreException? ->
                 if (e != null) {

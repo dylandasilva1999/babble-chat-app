@@ -54,14 +54,11 @@ class ChattingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatting)
 
+        otherUserId = intent.getStringExtra(Constants.USER_ID).toString()
+
         chatting_user_name.text = intent.getStringExtra(Constants.USER_NAME)
 
         val userName = intent.getStringExtra(Constants.USER_NAME)
-
-        MyFirebaseMessagingService.sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
-        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
-            MyFirebaseMessagingService.token = it.token
-        }
 
         Firestore.getCurrentUser {
             currentUser = it
@@ -71,8 +68,6 @@ class ChattingActivity : AppCompatActivity() {
             val intent = Intent(this, ChatsActivity::class.java)
             startActivity(intent)
         }
-
-        otherUserId = intent.getStringExtra(Constants.USER_ID).toString()
 
             Firestore.getOnCreateChatChannel(otherUserId!!) { channelId ->
 
@@ -85,7 +80,6 @@ class ChattingActivity : AppCompatActivity() {
                     editText_message.setText("")
                     Firestore.sendMessage(messageToSend, channelId)
                     topic = "topics/$otherUserId"
-                    FirebaseMessaging.getInstance().subscribeToTopic("/topics/$otherUserId")
                     PushNotification(NotificationData(userName!!, messageToSend),
                         topic).also {
                         sendNotification(it)
@@ -93,7 +87,6 @@ class ChattingActivity : AppCompatActivity() {
                 }
 
                 fab_send_image.setOnClickListener {
-                    FirebaseMessaging.getInstance().subscribeToTopic("/topics/$otherUserId")
                     val intent = Intent().apply {
                         type = "image/*"
                         action = Intent.ACTION_GET_CONTENT
