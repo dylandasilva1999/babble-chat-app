@@ -1,10 +1,17 @@
 package com.example.babble
 
 import android.app.Activity
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.example.babble.utils.Constants
 import com.example.babble.utils.Firestore
 import com.example.noted.BaseActivity
@@ -21,12 +28,33 @@ import org.jetbrains.anko.newTask
 
 class SignInActivity : BaseActivity() {
 
+    //Notification is based on Channel
+    val CHANNEL_ID = "channelID"
+    val CHANNEL_NAME = "channelName"
+
+    //Notification ID
+    val NOTIFICATION_ID = 0
+
     private lateinit var mAuth: FirebaseAuth
     private val RC_SIGN_IN = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
+
+        //Allow to create notifications
+        createNotificationChannel()
+
+        //Create notifications
+        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setContentTitle("Babble")
+            .setContentText("Successfully Signed In!")
+            .setSmallIcon(R.mipmap.ic_launcher_round)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(true)
+            .build()
+
+        val notificationManager = NotificationManagerCompat.from(this)
 
         //Make the View FullScreen
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -41,6 +69,7 @@ class SignInActivity : BaseActivity() {
             signInUser()
             et_email_si.setText("")
             et_password_si.setText("")
+            notificationManager.notify(NOTIFICATION_ID, notification)
         }
 
         mAuth = FirebaseAuth.getInstance()
@@ -68,6 +97,22 @@ class SignInActivity : BaseActivity() {
                         showErrorSnackBar("Unknown Error", true)
                 }
             }
+        }
+    }
+
+    fun createNotificationChannel() {
+        //Check the SDK version is greater than oreo
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //Create a notification channel and send the ID, Name & importance
+            val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT).apply {
+                //Set the notification LED colour
+                enableLights(true)
+                lightColor = Color.YELLOW
+            }
+
+            //Set manager as Notification Service
+            val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            manager.createNotificationChannel(channel)
         }
     }
 
