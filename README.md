@@ -22,7 +22,7 @@
       <a href="https://github.com/dylandasilva1999/babble-chat-app"><strong>Explore the docs »</strong></a>
    <br />
    <br />
-   <a href="">View Demo</a>
+   <a href="https://youtu.be/P1HdUO6RXXc">View Demo</a>
     ·
     <a href="https://github.com/dylandasilva1999/babble-chat-app/issues">Report Bug</a>
     ·
@@ -200,14 +200,14 @@ The `Peer Reviews` were conducted by my fellow students and lecturer.
 
 To see a run through of the application, click below:
 
-[View Demo]()
+[View Demo](https://youtu.be/P1HdUO6RXXc)
 
 <!-- PROMO VIDEO -->
 ## Promo Video
 
 To see the promo video, click below:
 
-[View Promo Video]()
+[View Promo Video](https://youtu.be/Km3a_XomsIE)
 
 <!-- ROADMAP -->
 ## Roadmap
