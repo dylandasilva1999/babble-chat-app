@@ -109,15 +109,37 @@ Open `Android Studio` and select `File | Open...` from the menu. Select cloned d
 ### Features
 
 <!--![image2][image2]-->
-* Secure log in and sign up.
-* Babble on chat groups.
-* Babble and send text messages to other babblers.
-* Update your profile information.
-* Recieve push notifications when other babblers send messages.
+### Secure Authentication
+
+Secure log in and sign up.
+
+### Image Messages
+
+Babble and send image messages to other babblers.
+
+### Text Messages
+
+Babble and send text messages to other babblers.
+
+### Profile View
+
+Update your profile information.
+
+### Sign In Notification
+
+Recieve push notifications when signing in.
 
 ### Functionality
 
-Functionality to be listed here soon!
+* `Linear`, `Constraint`, `Recycler View`, and `Frame` layouts were used to create the layouts.
+* Made use of both `Fragments` and `Activities` for navigation.
+* `Firestore Database` for storing users and messages.
+* `Firebase Authentication` for users.
+* `Firebase Storage` for images sent and profile images
+* `Glidemodule` for image messages and messages.
+* `Retrofit` for push notifications.
+* `Intents` are used transfer certain information from one activity to another.
+* `Lottie Animations` is for displaying success animations on sign in and sign up.
 
 <!-- CONCEPT PROCESS -->
 ## Concept Process
@@ -148,7 +170,8 @@ The `Development Process` is the technical implementations and functionality don
 
 #### Challenges
 
-Challenges to be listed here soon!
+* The ability to send messages to specific users.
+* Profile image updating and user info update.
 
 ### Peer Reviews
 
@@ -156,18 +179,18 @@ The `Peer Reviews` were conducted by my fellow students and lecturer.
 
 #### Feedback
 
-Feedback to be listed here soon!
+* A major highlight was fixing on bad bug I had.
+* Another highlight is the sending of images, and the success animations.
 
 #### Future Changes
 
-Future changes to be listed here soon!
+* Add group chat functionality in the chats section.
+* Sending of emoji and gifs in any chat.
 
 <!-- MOCKUPS -->
 ## Mockups
 
 <!--![image8][image8]-->
-
-<!--![image9][image9]-->
 
 <!-- VIDEO DEMONSTRATION -->
 ## Video Demonstration
@@ -175,6 +198,13 @@ Future changes to be listed here soon!
 To see a run through of the application, click below:
 
 [View Demo]()
+
+<!-- PROMO VIDEO -->
+## Promo Video
+
+To see the promo video, click below:
+
+[View Promo Video]()
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -214,6 +244,11 @@ Distributed under the MIT License. See `LICENSE` for more information.\
 * [My lecturer Armand Pretorius](https://github.com/ArmandPretorius)
 * [Whatsapp Statistics Article](https://firstdraftnews.org/long-form-article/closed-groups-messaging-apps-and-online-ads/)
 * [Babble Definition](https://www.merriam-webster.com/dictionary/babble)
+* [Lottie Animations](https://lottiefiles.com/)
+* [Firebase](https://firebase.google.com/)
+* [Youtube Tutorial](https://www.youtube.com/watch?v=uB7WeED1d1w&list=PLB6lc7nQ1n4h5tzT3tu_YSy9VNrVUR_4W)
+* [Flaticon](https://www.flaticon.com/)
+* [Illustrations](https://www.drawkit.io/product/drawkit-classic)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [image1]: Images/Image1.png
