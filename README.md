@@ -207,7 +207,7 @@ To see a run through of the application, click below:
 
 To see the promo video, click below:
 
-[View Promo Video](https://youtu.be/Km3a_XomsIE)
+[View Promo Video](https://youtu.be/pnr8wTz3K8A)
 
 <!-- ROADMAP -->
 ## Roadmap
